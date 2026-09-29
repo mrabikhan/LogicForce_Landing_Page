@@ -41,10 +41,10 @@ function GithubIcon({ size = 16 }: IconProps) {
 }
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com/company/ingeniousconcepts", icon: LinkedinIcon },
-  { label: "X (Twitter)", href: "https://x.com/ingeniousconcepts", icon: XIcon },
-  { label: "Instagram", href: "https://instagram.com/ingeniousconcepts", icon: InstagramIcon },
-  { label: "GitHub", href: "https://github.com/ingenious-concepts", icon: GithubIcon },
+  { label: "LinkedIn", href: "https://linkedin.com/company/logicforce", icon: LinkedinIcon },
+  { label: "X (Twitter)", href: "https://x.com/logicforce", icon: XIcon },
+  { label: "Instagram", href: "https://instagram.com/logicforce", icon: InstagramIcon },
+  { label: "GitHub", href: "https://github.com/logic-force", icon: GithubIcon },
 ];
 
 const quickLinks = [
@@ -62,8 +62,8 @@ const legalLinks = [
 ];
 
 const contactDetails = [
-  { label: "Business", value: "business@ingeniousc.com", href: "mailto:business@ingeniousc.com", icon: Mail },
-  { label: "Sales", value: "sales@ingeniousc.com", href: "mailto:sales@ingeniousc.com", icon: Mail },
+  { label: "Business", value: "business@logicforce.io", href: "mailto:business@logicforce.io", icon: Mail },
+  { label: "Sales", value: "sales@logicforce.io", href: "mailto:sales@logicforce.io", icon: Mail },
   { label: "Pakistan", value: "+92 321 404 4590", href: "tel:+923214044590", icon: Phone },
   { label: "USA", value: "+1 214 235 8360", href: "tel:+12142358360", icon: Phone },
 ];
@@ -96,14 +96,13 @@ export default function Footer() {
 
       <div
         ref={ref}
-        className={`relative mx-auto max-w-7xl px-5 pt-20 pb-10 transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-7xl px-5 pt-20 pb-10 transition-all duration-700 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
       >
         <div className="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.9fr_1fr]">
           {/* Brand */}
           <div>
-            <img src={logo} alt="Ingenious Concepts" className="h-8 w-auto brightness-0 invert" />
+            <img src={logo} alt="Logic Force" className="h-20 w-auto brightness-0 invert" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
               Digital product, growth and security under one roof — engineered
               from Lahore, delivered worldwide.
@@ -200,7 +199,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Ingenious Concepts. All rights reserved.
+            © {new Date().getFullYear()} Logic Force. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {legalLinks.map((link) => (

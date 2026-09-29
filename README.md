@@ -1,7 +1,7 @@
-# Ingenious Concepts – Corporate Landing Page
+# Logic Force  – Corporate Landing Page
 
 ## 📖 Overview
-The **Ingenious Concepts Landing Page** is a premium, ultra-modern corporate website designed for a global software, design, and growth agency (operating across Lahore, Dallas, and Sydney). The landing page is engineered to showcase the company's core disciplines—Growth, Build, and Secure & Scale—through highly interactive, aesthetic, and responsive UI components.
+The **Logic Force Landing Page** is a premium, ultra-modern corporate website designed for a global software, design, and growth agency (operating across Lahore, Dallas, and Sydney). The landing page is engineered to showcase the company's core disciplines—Growth, Build, and Secure & Scale—through highly interactive, aesthetic, and responsive UI components.
 
 ## 🚀 Tech Stack
 This project is built using modern web development technologies focusing on performance, modularity, and premium aesthetics:
@@ -23,7 +23,7 @@ This project is built using modern web development technologies focusing on perf
 The core application logic is located within the `newapp` directory:
 
 ```text
-Ingenious Landing Page/
+LogicForce Landing Page/
 ├── README.md              # Project documentation
 └── newapp/                # Main application folder
     ├── src/
@@ -69,4 +69,4 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
    ```
 
 ---
-*Designed & Developed for Ingenious Concepts.*
+*Designed & Developed for Logic Force.*

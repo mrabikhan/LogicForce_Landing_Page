@@ -1,269 +1,162 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { useInView } from "../../hooks/useInView";
 import vantageImg from "../../assets/projects/vantage-crm.jpg";
 import meridianImg from "../../assets/projects/meridian-health.jpg";
 import loomcraftImg from "../../assets/projects/loomcraft.jpg";
-import pulseImg from "../../assets/projects/pulse-fitness.jpg";
-import northbridgeImg from "../../assets/projects/northbridge-bank.jpg";
 
 interface Project {
   title: string;
-  tag: string;
-  caption: string;
+  category: string;
+  description: string;
   url: string;
   image: string;
+  gradient: string;
 }
 
-const projects: Project[] = [
+const featuredProjects: Project[] = [
   {
-    title: "Vantage CRM — Workflow Automation",
-    tag: "Automation",
-    caption:
-      "Vantage CRM — an n8n-powered automation layer that cut manual order processing time for a logistics client by more than half.",
-    url: "vantagecrm.io",
-    image: vantageImg,
+    title: "Inner Glow Studio",
+    category: "E-Commerce System",
+    description: "A custom e-commerce storefront for a premium cosmetics brand. Engineered with seamless checkout flows, high-performance product galleries, and robust inventory integration to handle seasonal traffic spikes effortlessly.",
+    url: "innerglowstudio.com",
+    image: vantageImg, // Keeping the existing import variable name to prevent broken references
+    gradient: "from-ocean-500 to-royal-600",
   },
   {
-    title: "Meridian Health — Telehealth Platform",
-    tag: "Software Development",
-    caption:
-      "Meridian Health — a HIPAA-conscious booking and video-consult web app built to handle appointment volume without breaking a sweat.",
-    url: "meridianhealth.app",
+    title: "Brand Growth Studio",
+    category: "SEO & Brand Identity",
+    description: "A complete digital rebranding and deep technical SEO overhaul for an established marketing agency. We restructured their web architecture to dominate search rankings and modernized their aesthetic to attract enterprise clients.",
+    url: "brandgrowthstudio.io",
     image: meridianImg,
+    gradient: "from-royal-400 to-navy-700",
   },
   {
-    title: "Loomcraft — E-Commerce Redesign",
-    tag: "E-Commerce",
-    caption:
-      "Loomcraft — a Shopify storefront rebuild for a homeware brand, focused on cutting checkout friction and mobile load times.",
-    url: "loomcraft.com",
+    title: "All Smiles Dental",
+    category: "Web Development & Design",
+    description: "A patient-centric portfolio and booking website for a modern dental clinic. Designed to instill trust through clean aesthetics while streamlining the patient onboarding process with integrated appointment scheduling.",
+    url: "allsmilesclinic.com",
     image: loomcraftImg,
-  },
-  {
-    title: "Pulse Fitness — VR Training App",
-    tag: "Gaming & XR",
-    caption:
-      "Pulse Fitness — a VR training experience built to keep members engaged well past the usual two-week gym-app drop-off.",
-    url: "pulsefitness.vr",
-    image: pulseImg,
-  },
-  {
-    title: "Northbridge Bank — Security Audit",
-    tag: "Cybersecurity",
-    caption:
-      "Northbridge Bank — a full penetration test and compliance readiness review ahead of a regional banking license renewal.",
-    url: "northbridgebank.com",
-    image: northbridgeImg,
+    gradient: "from-ocean-400 to-ocean-700",
   },
 ];
-
-const stats = [
-  { target: 100, suffix: "+", label: "Digital projects delivered" },
-  { target: 40, suffix: "%", label: "Average conversion lift" },
-];
-
-function useCountUp(target: number, start: boolean, duration = 1400) {
-  const [value, setValue] = useState(0);
-  const startedRef = useRef(false);
-
-  useEffect(() => {
-    if (!start || startedRef.current) return;
-    startedRef.current = true;
-
-    let raf: number;
-    const startTime = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(eased * target));
-      if (progress < 1) raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [start, target, duration]);
-
-  return value;
-}
-
-function StatItem({
-  stat,
-  start,
-}: {
-  stat: (typeof stats)[number];
-  start: boolean;
-}) {
-  const value = useCountUp(stat.target, start);
-  return (
-    <div>
-      <p className="text-4xl font-semibold text-ink sm:text-5xl">
-        {value}
-        <span className="text-gold-600">{stat.suffix}</span>
-      </p>
-      <p className="mt-1 max-w-[10rem] text-xs text-ink/50 sm:text-sm">
-        {stat.label}
-      </p>
-    </div>
-  );
-}
-
-function BrowserFrame({ project }: { project: Project }) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-ink/10 bg-[#FAFAF8] shadow-[0_20px_60px_-24px_rgba(10,10,11,0.25)]">
-      <div className="flex items-center gap-3 border-b border-ink/10 bg-white px-4 py-3">
-        <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-        </div>
-        <div className="flex-1 rounded-full bg-ink/[0.04] px-3 py-1 text-center text-xs text-ink/40">
-          {project.url}
-        </div>
-      </div>
-      <div className="aspect-[16/10] w-full overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="h-full w-full object-cover"
-        />
-      </div>
-    </div>
-  );
-}
 
 export default function ProjectsSection() {
-  const [active, setActive] = useState(1);
-  const [paused, setPaused] = useState(false);
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 });
-  const project = projects[active];
-  const AUTOPLAY_MS = 5000;
-
-  // Auto-advance to the next project — resets on manual selection too,
-  // since `active` is a dependency. Pauses while the person is hovering.
-  useEffect(() => {
-    if (paused || !inView) return;
-    const id = setInterval(() => {
-      setActive((prev) => (prev + 1) % projects.length);
-    }, AUTOPLAY_MS);
-    return () => clearInterval(id);
-  }, [active, paused, inView]);
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.1 });
 
   return (
-    <section className="relative overflow-hidden bg-white py-24">
+    <section className="relative overflow-hidden bg-white py-32">
+      {/* Background aesthetics */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Subtle dot grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(0,119,204,0.1)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
-      <div className="pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full bg-gold-300/20 blur-[110px]" />
+        {/* Giant glowing blurred shapes */}
+        <div className="absolute left-[-10%] top-1/4 h-[40rem] w-[40rem] rounded-full bg-ocean-100/40 blur-[120px]" />
+        <div className="absolute right-[-10%] bottom-0 h-[30rem] w-[30rem] rounded-full bg-royal-100/40 blur-[100px]" />
+
+        {/* Geometric Polygons */}
+        <svg className="absolute left-10 top-10 opacity-[0.03] w-64 h-64 animate-spin-slow" viewBox="0 0 100 100">
+          <polygon points="50,0 100,100 0,100" fill="#0F3D7E" />
+        </svg>
+      </div>
+
       <div
         ref={ref}
-        className={`relative mx-auto max-w-7xl px-5 transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-7xl px-5 transition-all duration-1000 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
       >
-        {/* Header */}
-        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold-600">
-              Our Work
-            </p>
-            <h2 className="mt-3 text-3xl font-medium leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Projects{" "}
-              <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
-                we're proud
-              </span>{" "}
-              of.
-            </h2>
-          </div>
-          <p className="max-w-xs text-base text-ink/50 sm:text-right sm:text-lg">
-            You can rely on us as your trusted technology partner, delivering
-            quality results that meet your expectations.
+        <div className="mb-20 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-ocean-600">
+            Featured Work
+          </span>
+          <h2 className="mt-4 text-4xl font-bold leading-tight text-space-cadet sm:text-5xl lg:text-6xl">
+            Projects we're <span className="bg-gradient-to-r from-ocean-500 to-royal-400 bg-clip-text text-transparent">proud of.</span>
+          </h2>
+          <p className="mt-6 mx-auto max-w-2xl text-lg text-space-cadet/60">
+            We don't just build products; we build businesses. Here is a selection of recent
+            partnerships where Logic Force drove measurable impact.
           </p>
         </div>
 
-        {/* Explorer */}
-        <div
-          className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-16"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          {/* List + stats */}
-          <div>
-            <div className="border-l border-ink/10">
-              {projects.map((p, i) => {
-                const isActive = active === i;
-                return (
-                  <button
-                    key={p.title}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    className={`group relative flex w-full flex-col gap-2 border-l-2 py-4 pl-5 pr-3 text-left transition-colors duration-200 -ml-px ${
-                      isActive
-                        ? "border-gold-500"
-                        : "border-transparent hover:border-ink/15"
-                    }`}
-                  >
-                    <span className="flex items-start gap-4">
-                      <span
-                        className={`text-sm font-medium tabular-nums transition-colors ${
-                          isActive ? "text-gold-600" : "text-ink/25"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span
-                        className={`text-sm font-medium leading-snug transition-colors sm:text-base ${
-                          isActive ? "text-ink" : "text-ink/35 group-hover:text-ink/60"
-                        }`}
-                      >
-                        {p.title}
-                      </span>
+        {/* Stacked Project Showcase */}
+        <div className="space-y-16 lg:space-y-24">
+          {featuredProjects.map((project, index) => {
+            const isEven = index % 2 === 0;
+
+            return (
+              <div key={index} className={`flex flex-col gap-10 lg:gap-16 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+
+                {/* Image Side */}
+                <div className="w-full lg:w-3/5 group relative perspective-1000">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`} />
+
+                  <div className="relative overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-2xl transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+                    {/* Browser Mockup Top Bar */}
+                    <div className="flex items-center gap-3 border-b border-navy-50 bg-navy-50/50 px-4 py-3 backdrop-blur-md">
+                      <div className="flex gap-1.5">
+                        <div className="h-3 w-3 rounded-full bg-red-400/80" />
+                        <div className="h-3 w-3 rounded-full bg-amber-400/80" />
+                        <div className="h-3 w-3 rounded-full bg-green-400/80" />
+                      </div>
+                      <div className="mx-auto flex w-1/2 items-center justify-center rounded-md bg-white py-1 text-xs text-space-cadet/40 shadow-sm">
+                        {project.url}
+                      </div>
+                    </div>
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Overlay gradient on image */}
+                    <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-navy-900/40 to-transparent" />
+                  </div>
+                </div>
+
+                {/* Content Side */}
+                <div className="w-full lg:w-2/5 flex flex-col justify-center">
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-4xl font-extrabold text-ocean-100">0{index + 1}</span>
+                    <span className="h-px flex-1 bg-ocean-100" />
+                  </div>
+
+                  <span className="text-sm font-bold uppercase tracking-wider text-ocean-500 mb-2">
+                    {project.category}
+                  </span>
+
+                  <h3 className="text-3xl sm:text-4xl font-bold text-space-cadet mb-6">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-lg text-space-cadet/70 leading-relaxed mb-8">
+                    {project.description}
+                  </p>
+
+                  <a href={`https://${project.url}`} target="_blank" rel="noreferrer" className="group/btn inline-flex items-center gap-2 text-ocean-600 font-bold hover:text-royal-600 transition-colors">
+                    View Case Study
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ocean-50 text-ocean-600 transition-all group-hover/btn:bg-ocean-600 group-hover/btn:text-white group-hover/btn:translate-x-1">
+                      <ArrowRight size={16} />
                     </span>
-
-                    {/* Autoplay progress bar — only on the active row */}
-                    {isActive && (
-                      <span className="ml-9 h-[2px] max-w-[220px] overflow-hidden rounded-full bg-ink/10">
-                        <span
-                          key={`${active}-${paused}`}
-                          className="block h-full origin-left bg-gold-500 [animation:progress_5s_linear_forwards]"
-                          style={{ animationPlayState: paused ? "paused" : "running" }}
-                        />
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Stats */}
-            <div className="mt-10 flex gap-10">
-              {stats.map((stat) => (
-                <StatItem key={stat.label} stat={stat} start={inView} />
-              ))}
-            </div>
-          </div>
-
-          {/* Preview */}
-          <div>
-            <div key={active} className="animate-fade-up">
-              <BrowserFrame project={project} />
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-ink/55 sm:text-lg">
-                <span className="font-medium text-ink">{project.tag} — </span>
-                {project.caption}
-              </p>
-            </div>
-          </div>
+                  </a>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
-        {/* CTA */}
-        <div className="mt-14 flex justify-center">
+        {/* Global View All CTA */}
+        <div className="mt-24 flex justify-center">
           <a
             href="/portfolio"
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-ink/85"
+            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-space-cadet px-10 py-5 text-base font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(4,15,32,0.3)]"
           >
-            See all projects
-            <ArrowRight size={15} />
+            <div className="absolute inset-0 bg-gradient-to-r from-ocean-500 to-royal-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <span className="relative z-10 flex items-center gap-2">
+              Explore Full Portfolio
+              <ExternalLink size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </a>
         </div>
       </div>

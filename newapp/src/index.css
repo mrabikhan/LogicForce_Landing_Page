@@ -1,17 +1,39 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 @theme {
-  --color-ink: #0A0A0B;
+  /* Core brand palette */
+  --color-ink: #0D0D0D;
+  --color-space-cadet: #1B2A4A;
 
-  --color-gold-50: #FFF9EC;
-  --color-gold-100: #FEF0CE;
-  --color-gold-200: #FCE3A0;
-  --color-gold-300: #FBD672;
-  --color-gold-400: #F7C948;
-  --color-gold-500: #F5A623;
-  --color-gold-600: #F2861A;
-  --color-gold-700: #E8720C;
+  /* Ocean / Navy / Royal Blue scale */
+  --color-ocean-50:  #E8F4FD;
+  --color-ocean-100: #C7E4F9;
+  --color-ocean-200: #90C8F3;
+  --color-ocean-300: #52A9EC;
+  --color-ocean-400: #1A8FE3;
+  --color-ocean-500: #0077CC;   /* primary ocean blue */
+  --color-ocean-600: #0062AA;
 
+  --color-navy-50:  #E7EDF6;
+  --color-navy-100: #C2D2E9;
+  --color-navy-200: #8AACD4;
+  --color-navy-300: #4E82BC;
+  --color-navy-400: #2962A8;
+  --color-navy-500: #0F3D7E;   /* deep navy */
+  --color-navy-600: #0A2D5E;
+  --color-navy-700: #071D3E;
+  --color-navy-800: #040F20;
+
+  --color-royal-50:  #E8EDFF;
+  --color-royal-100: #C3CEFF;
+  --color-royal-200: #96A8FF;
+  --color-royal-300: #6A82FF;
+  --color-royal-400: #4361EE;   /* royal blue */
+  --color-royal-500: #2445D8;
+  --color-royal-600: #1534C0;
+
+  /* Animations */
   --animate-gradient-x: gradient-x 6s ease infinite;
   --animate-spin-slow: spin-slow 40s linear infinite;
   --animate-bounce-slow: bounce-slow 2s ease-in-out infinite;
@@ -19,6 +41,11 @@
   --animate-fade-up: fade-up 0.5s ease both;
   --animate-flow-dot: flow-dot 1.8s linear infinite;
   --animate-float: float 4s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+}
+
+* {
+  font-family: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 @keyframes float {
@@ -57,4 +84,8 @@
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
 }

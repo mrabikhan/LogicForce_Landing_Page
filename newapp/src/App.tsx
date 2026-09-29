@@ -6,6 +6,7 @@ import GoogleReviewsSection from "./components/homepage/GoogleReviewsSection"
 import FaqSection from "./components/homepage/FaqSection"
 import IndustrialPartners from "./components/homepage/IndustrialPartners"
 import ServicesSection from "./components/homepage/ServicesSection"
+import VideoSection from "./components/homepage/VideoSection"
 import ProjectsSection from "./components/homepage/ProjectsSection"
 import AutomationSection from "./components/homepage/AutomationSection"
 import CtaSection from "./components/homepage/CtaSection"
@@ -26,6 +27,7 @@ function App() {
       <CoreServicesSection />
       <TrustedBy />
       <ServicesSection />
+      <VideoSection />
       <IndustrialPartners />
       <AutomationSection />
       <ProjectsSection />

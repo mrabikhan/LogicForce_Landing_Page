@@ -63,16 +63,14 @@ export default function LocationsSection() {
         {locations.map((loc, i) => (
           <div
             key={loc.city}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-              active === i ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${active === i ? "opacity-100" : "opacity-0"
+              }`}
           >
             <img
               src={loc.image}
               alt={`${loc.city} office`}
-              className={`h-full w-full object-cover transition-transform duration-[1400ms] ease-out ${
-                active === i ? "scale-105" : "scale-100"
-              }`}
+              className={`h-full w-full object-cover transition-transform duration-[1400ms] ease-out ${active === i ? "scale-105" : "scale-100"
+                }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
           </div>
@@ -95,9 +93,8 @@ export default function LocationsSection() {
             {locations.map((loc, i) => (
               <span
                 key={loc.city}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  active === i ? "w-8 bg-gold-400" : "w-4 bg-white/20"
-                }`}
+                className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-8 bg-gold-400" : "w-4 bg-white/20"
+                  }`}
               />
             ))}
           </div>

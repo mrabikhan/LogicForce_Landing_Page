@@ -31,7 +31,7 @@ export const megaMenuColumns: MegaMenuColumn[] = [
     id: "grow",
     label: "Grow",
     tagline: "Get found, get chosen, get paid",
-    accent: "from-gold-400 to-gold-600",
+    accent: "from-ocean-400 to-ocean-600",
     items: [
       {
         title: "AI Digital Marketing",
@@ -57,7 +57,7 @@ export const megaMenuColumns: MegaMenuColumn[] = [
     id: "build",
     label: "Build",
     tagline: "Ship the product",
-    accent: "from-amber-400 to-gold-600",
+    accent: "from-royal-400 to-navy-600",
     items: [
       {
         title: "Software Development",
@@ -83,7 +83,7 @@ export const megaMenuColumns: MegaMenuColumn[] = [
     id: "secure",
     label: "Secure & Scale",
     tagline: "Operate with confidence",
-    accent: "from-gold-500 to-orange-600",
+    accent: "from-ocean-500 to-royal-600",
     items: [
       {
         title: "Automation",
@@ -112,4 +112,5 @@ export const primaryNavLinks = [
   { label: "About Us", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];

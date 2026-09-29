@@ -9,7 +9,7 @@ interface FaqItem {
 
 const faqs: FaqItem[] = [
   {
-    question: "What services does Ingenious Concepts actually cover?",
+    question: "What services does Logic Force actually cover?",
     answer:
       "Nine, grouped into three lanes: Grow (AI digital marketing, SEO & GEO, e-commerce), Build (software development, design, gaming & XR), and Secure & Scale (automation, staff augmentation, cybersecurity). Most clients start with one and expand as the relationship grows.",
   },
@@ -31,7 +31,7 @@ const faqs: FaqItem[] = [
   {
     question: "What does getting started actually look like?",
     answer:
-      "Send us a note through the contact form or email business@ingeniousc.com. We reply within one business day, usually with a few clarifying questions before scheduling a call with the right regional team.",
+      "Send us a note through the contact form or email business@logicforce.io. We reply within one business day, usually with a few clarifying questions before scheduling a call with the right regional team.",
   },
 ];
 
@@ -48,17 +48,15 @@ function FaqCard({
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen
-          ? "border-gold-500/40 bg-gradient-to-br from-gold-50/80 to-white shadow-[0_8px_30px_-8px_rgba(245,166,35,0.25)]"
-          : "border-ink/10 bg-white hover:border-ink/20 hover:shadow-[0_4px_20px_-6px_rgba(10,10,11,0.08)]"
-      }`}
+      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen
+        ? "border-gold-500/40 bg-gradient-to-br from-gold-50/80 to-white shadow-[0_8px_30px_-8px_rgba(245,166,35,0.25)]"
+        : "border-ink/10 bg-white hover:border-ink/20 hover:shadow-[0_4px_20px_-6px_rgba(10,10,11,0.08)]"
+        }`}
     >
       {/* accent bar */}
       <span
-        className={`absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-gold-400 to-gold-600 transition-transform duration-300 ${
-          isOpen ? "scale-y-100" : "scale-y-0"
-        }`}
+        className={`absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-gold-400 to-gold-600 transition-transform duration-300 ${isOpen ? "scale-y-100" : "scale-y-0"
+          }`}
       />
       <button
         type="button"
@@ -67,33 +65,29 @@ function FaqCard({
         className="flex w-full items-center gap-5 px-6 py-5 text-left sm:px-7 sm:py-6"
       >
         <span
-          className={`shrink-0 font-mono text-xs font-medium tabular-nums transition-colors ${
-            isOpen ? "text-gold-600" : "text-ink/30"
-          }`}
+          className={`shrink-0 font-mono text-xs font-medium tabular-nums transition-colors ${isOpen ? "text-gold-600" : "text-ink/30"
+            }`}
         >
           {String(index + 1).padStart(2, "0")}
         </span>
         <span
-          className={`flex-1 text-base font-medium transition-colors sm:text-lg ${
-            isOpen ? "text-ink" : "text-ink/80"
-          }`}
+          className={`flex-1 text-base font-medium transition-colors sm:text-lg ${isOpen ? "text-ink" : "text-ink/80"
+            }`}
         >
           {item.question}
         </span>
         <span
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-            isOpen
-              ? "rotate-180 border-transparent bg-gradient-to-br from-gold-400 to-gold-600 text-ink"
-              : "border-ink/15 text-ink/40 group-hover:border-ink/30"
-          }`}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen
+            ? "rotate-180 border-transparent bg-gradient-to-br from-gold-400 to-gold-600 text-ink"
+            : "border-ink/15 text-ink/40 group-hover:border-ink/30"
+            }`}
         >
           <ChevronDown size={15} />
         </span>
       </button>
       <div
-        className={`grid transition-all duration-300 ease-out ${
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+        className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          }`}
       >
         <div className="overflow-hidden">
           <p className="max-w-xl px-6 pb-6 pl-[3.1rem] text-sm leading-relaxed text-ink/55 sm:px-7 sm:pb-7 sm:pl-[3.6rem] sm:text-base">
@@ -116,9 +110,8 @@ export default function FaqSection() {
 
       <div
         ref={ref}
-        className={`relative mx-auto max-w-6xl px-5 transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-6xl px-5 transition-all duration-700 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
       >
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.3fr] lg:gap-16">
           {/* Left rail */}
@@ -141,10 +134,10 @@ export default function FaqSection() {
                 Email us and a real person replies within one business day.
               </p>
               <a
-                href="mailto:business@ingeniousc.com"
+                href="mailto:business@logicforce.io"
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-gold-400 hover:text-gold-300"
               >
-                business@ingeniousc.com
+                business@logicforce.io
                 <ArrowUpRight size={14} />
               </a>
             </div>

@@ -22,7 +22,7 @@ const marqueeWords = [
   "Secure",
   "Creative",
   "Strategic",
-  "Ingenious",
+  "Forceful",
 ];
 
 interface FormState {
@@ -46,34 +46,35 @@ export default function ScheduleConsultationSection() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: wire this up to your backend / email service / CRM.
     setSubmitted(true);
     setForm(emptyForm);
   };
 
   const inputClasses =
-    "w-full rounded-xl border border-ink/12 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/35 transition-colors focus:border-gold-500/60 focus:outline-none focus:ring-2 focus:ring-gold-500/15";
+    "w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-sm text-space-cadet placeholder:text-space-cadet/35 transition-colors focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-400/15";
 
   return (
-    <section className="relative overflow-hidden bg-gray-100 py-24">
+    <section className="relative overflow-hidden py-24" style={{ background: "#EEF3FB" }}>
+      {/* Background accent */}
+      <div className="pointer-events-none absolute -right-32 top-0 h-80 w-80 rounded-full bg-ocean-200/40 blur-[110px]" />
+
       <div
         ref={ref}
-        className={`mx-auto max-w-6xl px-5 transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`mx-auto max-w-6xl px-5 transition-all duration-700 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
       >
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
           {/* Left: gif + marquee */}
           <div className="flex flex-col justify-center">
-            <div className="overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-[0_20px_50px_-24px_rgba(10,10,11,0.2)]">
+            <div className="overflow-hidden rounded-3xl border border-navy-200 bg-white shadow-[0_20px_50px_-24px_rgba(15,61,126,0.25)]">
               <img
                 src={consultationGif}
-                alt="Ingenious Concepts at work"
+                alt="Logic Force at work"
                 className="h-full w-full object-cover"
               />
             </div>
 
-            {/* Continuously moving word marquee — pauses + highlights on hover */}
+            {/* Marquee */}
             <div
               className="mt-8 overflow-hidden"
               onMouseEnter={() => setMarqueePaused(true)}
@@ -86,36 +87,36 @@ export default function ScheduleConsultationSection() {
                 {[...marqueeWords, ...marqueeWords].map((word, i) => (
                   <span
                     key={`${word}-${i}`}
-                    className="flex items-center gap-8 text-2xl font-medium text-ink/45 transition-colors duration-200 hover:text-gold-500 sm:text-3xl"
+                    className="flex items-center gap-8 text-2xl font-bold text-space-cadet/30 transition-colors duration-200 hover:text-ocean-500 sm:text-3xl"
                   >
                     {word}
-                    <span className="text-gold-500/40">•</span>
+                    <span className="text-ocean-400/40">•</span>
                   </span>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Right: heading, paragraph, form */}
+          {/* Right: heading + form */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gold-600">
+            <p className="text-xs font-semibold uppercase tracking-wide text-ocean-500">
               Schedule a Consultation
             </p>
-            <h2 className="mt-3 text-3xl font-medium leading-tight text-ink sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold leading-tight text-space-cadet sm:text-4xl">
               Let's map out your next move.
             </h2>
-            <p className="mt-4 text-base text-ink/55 sm:text-lg">
+            <p className="mt-4 text-base text-space-cadet/55 sm:text-lg">
               Tell us a bit about what you're working on and pick the service
               closest to it — we'll come prepared with real ideas, not a
               generic sales pitch.
             </p>
 
             {submitted ? (
-              <div className="mt-8 rounded-2xl border border-gold-500/30 bg-gold-500/10 px-6 py-8 text-center">
-                <p className="text-base font-medium text-ink">
+              <div className="mt-8 rounded-2xl border border-ocean-300 bg-ocean-50 px-6 py-8 text-center">
+                <p className="text-base font-semibold text-space-cadet">
                   Thanks — we've got it.
                 </p>
-                <p className="mt-1 text-sm text-ink/55">
+                <p className="mt-1 text-sm text-space-cadet/55">
                   We'll reply within one business day.
                 </p>
               </div>
@@ -153,13 +154,13 @@ export default function ScheduleConsultationSection() {
                     required
                     value={form.service}
                     onChange={(e) => update("service", e.target.value)}
-                    className={`${inputClasses} ${form.service ? "text-ink" : "text-ink/35"}`}
+                    className={`${inputClasses} ${form.service ? "text-space-cadet" : "text-space-cadet/35"}`}
                   >
                     <option value="" disabled>
                       Select a service
                     </option>
                     {services.map((s) => (
-                      <option key={s} value={s} className="text-ink">
+                      <option key={s} value={s} className="text-space-cadet">
                         {s}
                       </option>
                     ))}
@@ -177,7 +178,7 @@ export default function ScheduleConsultationSection() {
 
                 <button
                   type="submit"
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 px-6 py-3.5 text-sm font-semibold text-ink transition-all duration-300 hover:shadow-[0_10px_30px_-8px_rgba(245,166,35,0.5)] sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-ocean-500 to-royal-400 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_10px_30px_-8px_rgba(26,143,227,0.5)] hover:-translate-y-0.5 sm:w-auto"
                 >
                   Schedule consultation
                   <Send size={15} className="transition-transform duration-300 group-hover:translate-x-1" />

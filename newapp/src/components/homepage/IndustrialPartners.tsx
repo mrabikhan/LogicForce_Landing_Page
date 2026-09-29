@@ -113,7 +113,7 @@ export default function IndustrialPartners() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-100 py-20 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-neutral-100 py-32 sm:py-40 lg:py-48 min-h-[60vh] flex flex-col justify-center"
       aria-label="Technology stack behind our digital solutions"
     >
       {/* dotted background */}
@@ -184,9 +184,9 @@ export default function IndustrialPartners() {
       {/* center content */}
       <div className="relative mx-auto flex max-w-xl flex-col items-center px-6 text-center">
         <h2 className="text-2xl font-bold leading-tight text-neutral-900 sm:text-3xl lg:text-4xl">
-          The Tech Stack Behind
+          Our Network of
           <br />
-          <span className="text-gold-600">our Digital Solutions</span>
+          <span className="text-ocean-500">Industrial Partners</span>
         </h2>
 
         <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:mt-5 sm:text-base lg:text-lg">
@@ -196,7 +196,7 @@ export default function IndustrialPartners() {
 
         <button
           type="button"
-          className="mt-6 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-6 py-2.5 text-sm font-semibold text-black shadow-sm transition-colors hover:shadow-[0_0_30px_6px_rgba(245,166,35,0.4)] hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 sm:mt-8 sm:px-7 sm:py-3"
+          className="mt-6 rounded-full bg-gradient-to-r from-ocean-500 to-royal-400 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:shadow-[0_0_30px_6px_rgba(26,143,227,0.4)] hover:-translate-y-0.5 sm:mt-8 sm:px-7 sm:py-3"
         >
           Book a Free Consultation
         </button>

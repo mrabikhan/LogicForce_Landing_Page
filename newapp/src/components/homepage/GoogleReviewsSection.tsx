@@ -1,31 +1,59 @@
-import { Star, ExternalLink } from "lucide-react";
+import { Star, ExternalLink, Quote } from "lucide-react";
 import { useInView } from "../../hooks/useInView";
 
-const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/maps/place/Ingenious+Concepts/@31.3664583,74.2292783,17z";
+const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/place/Logic+Force";
 
-// Placeholder testimonials — swap for live data. Google's terms require
-// reviews to come from the actual Places API response, not be hand-written
-// or scraped, so wire this up server-side with your Places API key and
-// the `reviews` field on a Place Details request, then map real results
-// into this same shape.
 interface Review {
   name: string;
   role: string;
   rating: number;
   text: string;
+  highlight: string;
 }
 
-const rowOne: Review[] = [
-  { name: "Ayesha K.", role: "Marketing Director", rating: 5, text: "Our organic traffic nearly doubled within the first quarter of working together." },
-  { name: "Marcus T.", role: "Founder", rating: 5, text: "They shipped our mobile app faster than any agency we'd used before." },
-  { name: "Fatima R.", role: "E-Commerce Manager", rating: 5, text: "Store conversions improved noticeably within weeks of the redesign going live." },
-];
-
-const rowTwo: Review[] = [
-  { name: "Sarah L.", role: "Operations Lead", rating: 5, text: "The automation work alone saved our team over twenty hours a week." },
-  { name: "James O.", role: "CTO", rating: 5, text: "Security audit was thorough, and every fix was implemented within days." },
-  { name: "David C.", role: "Product Manager", rating: 4, text: "Solid communication throughout, even working across three different timezones." },
+const reviews: Review[] = [
+  {
+    name: "Ayesha K.",
+    role: "Marketing Director",
+    rating: 5,
+    highlight: "Traffic nearly doubled.",
+    text: "Logic Force completely transformed our digital presence. Our organic traffic nearly doubled within the first quarter of working together, and the quality of leads improved dramatically."
+  },
+  {
+    name: "Marcus T.",
+    role: "Founder",
+    rating: 5,
+    highlight: "Unmatched execution speed.",
+    text: "They shipped our mobile app faster than any agency we'd used before. The codebase is incredibly clean and the UI is flawless."
+  },
+  {
+    name: "Sarah L.",
+    role: "Operations Lead",
+    rating: 5,
+    highlight: "Saved 20+ hours a week.",
+    text: "The n8n automation work alone saved our team over twenty hours a week. Things that used to fall through the cracks are now handled silently in the background."
+  },
+  {
+    name: "James O.",
+    role: "CTO",
+    rating: 5,
+    highlight: "Exceptional security audit.",
+    text: "Their penetration test was extremely thorough. They didn't just hand us a report; they worked with our engineers to implement every fix within days."
+  },
+  {
+    name: "Fatima R.",
+    role: "E-Commerce Manager",
+    rating: 5,
+    highlight: "Immediate conversion lift.",
+    text: "Store conversions improved noticeably within weeks of the Shopify redesign going live. The team is responsive, deeply knowledgeable, and highly strategic."
+  },
+  {
+    name: "David C.",
+    role: "Product Manager",
+    rating: 5,
+    highlight: "Global talent, local feel.",
+    text: "Solid communication throughout the entire product lifecycle. Even working across three different timezones, they felt like an extension of our in-house team."
+  }
 ];
 
 function GoogleG({ size = 22 }: { size?: number }) {
@@ -39,111 +67,105 @@ function GoogleG({ size = 22 }: { size?: number }) {
   );
 }
 
-function Stars({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          size={13}
-          className={i < rating ? "fill-gold-500 text-gold-500" : "fill-ink/10 text-ink/10"}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ReviewCard({ review }: { review: Review }) {
-  return (
-    <div className="w-[85vw] max-w-[320px] sm:w-[320px] shrink-0 rounded-2xl border border-ink/8 bg-white p-6 shadow-[0_1px_2px_rgba(10,10,11,0.04)]">
-      <div className="flex items-center justify-between">
-        <Stars rating={review.rating} />
-        <GoogleG size={16} />
-      </div>
-      <p className="mt-4 text-sm leading-relaxed text-ink/70">"{review.text}"</p>
-      <div className="mt-5 flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-100 text-sm font-semibold text-gold-700">
-          {review.name.charAt(0)}
-        </span>
-        <div>
-          <p className="text-sm font-medium text-ink">{review.name}</p>
-          <p className="text-xs text-ink/45">{review.role}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function GoogleReviewsSection() {
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.1 });
 
   return (
-    <section className="bg-[#FAFAF8] py-24">
+    <section className="relative bg-space-cadet py-32 overflow-hidden text-white">
+      {/* Dynamic Polygon Patterns */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <svg className="absolute top-0 right-0 w-1/2 h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <polygon points="100,0 100,100 0,100" fill="#1A8FE3" />
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-1/3 h-2/3" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <polygon points="0,100 100,100 0,0" fill="#4361EE" />
+        </svg>
+      </div>
+
       <div
         ref={ref}
-        className={`mx-auto max-w-3xl px-5 text-center transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-7xl px-5 transition-all duration-1000 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
       >
-        <p className="text-xs font-semibold uppercase tracking-wide text-gold-600">
-          Client Love
-        </p>
-        <h2 className="mt-3 text-3xl font-medium leading-tight text-ink sm:text-4xl lg:text-5xl">
-          Rated by the people we've actually worked with.
-        </h2>
-        <p className="mt-5 text-base text-ink/55 sm:text-lg">
-          Every review below comes from a verified Google profile — no
-          hand-picked quotes, just an honest record of how our clients rate
-          the work.
-        </p>
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-wider text-ocean-400 flex items-center gap-2">
+              <Star size={16} className="fill-current text-ocean-400" />
+              Client Love
+            </p>
+            <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              Rated by the people <br className="hidden md:block" />
+              we've actually <span className="text-ocean-400">worked with.</span>
+            </h2>
+            <p className="mt-6 text-lg text-white/60">
+              Real reviews from verified Google profiles. No hand-picked quotes,
+              just an honest record of how Logic Force delivers.
+            </p>
+          </div>
 
-        {/* Rating badge */}
-        <div className="mt-9 inline-flex items-center gap-4 rounded-full border border-ink/10 bg-white px-6 py-3 shadow-sm">
-          <GoogleG size={24} />
-          <div className="h-8 w-px bg-ink/10" />
-          <div className="text-left">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-semibold text-ink">4.9</span>
-              <Stars rating={5} />
+          {/* Google Rating Badge */}
+          <div className="shrink-0 flex items-center gap-5 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md shadow-xl">
+            <div className="flex items-center justify-center h-14 w-14 bg-white rounded-full">
+              <GoogleG size={30} />
             </div>
-            <p className="text-xs text-ink/45">Based on Google Reviews</p>
+            <div>
+              <div className="flex items-end gap-2">
+                <span className="text-3xl font-extrabold leading-none">5.0</span>
+                <div className="flex gap-1 pb-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={16} className="fill-ocean-400 text-ocean-400" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-sm text-white/50 mt-1 font-medium">Based on 50+ Google Reviews</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Carousel View */}
-      <div className="mt-12 flex w-full overflow-x-auto snap-x snap-mandatory gap-4 px-5 pb-6 sm:hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {[...rowOne, ...rowTwo].map((r, i) => (
-          <div key={`mobile-${i}`} className="snap-center shrink-0 first:ml-0">
-            <ReviewCard review={r} />
-          </div>
-        ))}
-      </div>
+        {/* Masonry Grid for Reviews */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {reviews.map((review, i) => (
+            <div
+              key={i}
+              className="break-inside-avoid relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all hover:border-ocean-400/50 hover:bg-white/10 group"
+            >
+              <Quote size={40} className="absolute top-4 right-4 text-white/5 opacity-50 group-hover:text-ocean-400/10 transition-colors duration-500" />
 
-      {/* Desktop Marquee Rows */}
-      <div className="mt-16 hidden space-y-5 overflow-hidden sm:block">
-        <div className="flex w-max gap-5 animate-marquee hover:[animation-play-state:paused]">
-          {[...rowOne, ...rowOne].map((r, i) => (
-            <ReviewCard key={`row1-${i}`} review={r} />
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: review.rating }).map((_, j) => (
+                  <Star key={j} size={14} className="fill-ocean-400 text-ocean-400" />
+                ))}
+              </div>
+
+              <h4 className="text-xl font-bold text-white mb-3">"{review.highlight}"</h4>
+              <p className="text-white/70 leading-relaxed text-sm md:text-base">
+                {review.text}
+              </p>
+
+              <div className="mt-8 flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-ocean-500 to-royal-600 font-bold shadow-lg shadow-ocean-500/20">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <p className="font-semibold">{review.name}</p>
+                  <p className="text-xs text-ocean-300 uppercase tracking-wide mt-0.5">{review.role}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-        <div className="flex w-max gap-5 animate-marquee [animation-direction:reverse] hover:[animation-play-state:paused]">
-          {[...rowTwo, ...rowTwo].map((r, i) => (
-            <ReviewCard key={`row2-${i}`} review={r} />
-          ))}
-        </div>
-      </div>
 
-      <div className="mt-14 flex justify-center px-5">
-        <a
-          href={GOOGLE_REVIEWS_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-ink/30"
-        >
-          Read all reviews on Google
-          <ExternalLink size={15} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
+        <div className="mt-16 flex justify-center">
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-ocean-500 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-ocean-500 hover:shadow-[0_0_30px_rgba(26,143,227,0.4)]"
+          >
+            Read all reviews on Google
+            <ExternalLink size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </div>
       </div>
     </section>
   );

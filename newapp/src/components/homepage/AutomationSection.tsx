@@ -74,11 +74,10 @@ function NodeCircle({
 }) {
   return (
     <div
-      className={`relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border sm:h-16 sm:w-16 ${
-        emphasized
-          ? "border-gold-500/50 bg-gradient-to-br from-gold-400 to-gold-600 text-ink shadow-[0_0_24px_2px_rgba(245,166,35,0.35)]"
+      className={`relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border sm:h-16 sm:w-16 ${emphasized
+          ? "border-ocean-400/60 bg-gradient-to-br from-ocean-400 to-royal-500 text-white shadow-[0_0_28px_4px_rgba(26,143,227,0.45)]"
           : "border-white/15 bg-white/5 text-white/70"
-      }`}
+        }`}
     >
       <Icon size={emphasized ? 24 : 22} />
     </div>
@@ -89,7 +88,7 @@ function Connector({ delay = "0s" }: { delay?: string }) {
   return (
     <div className="relative mx-1 h-[2px] w-10 shrink-0 overflow-hidden rounded-full bg-white/10 sm:w-16">
       <span
-        className="absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-gold-400 shadow-[0_0_8px_1px_rgba(245,166,35,0.7)] animate-flow-dot"
+        className="absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-ocean-300 shadow-[0_0_10px_2px_rgba(82,169,236,0.8)] animate-flow-dot"
         style={{ animationDelay: delay }}
       />
     </div>
@@ -125,13 +124,19 @@ export default function AutomationSection() {
   const goTo = (i: number) => setActive((i + slides.length) % slides.length);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24">
-      {/* Ambient glow + faint grid, matching the automation/tech mood */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-gold-500/15 blur-[130px]" />
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.35]" aria-hidden="true">
+    <section
+      className="relative overflow-hidden py-24"
+      style={{ background: "linear-gradient(160deg, #040F20 0%, #0A2D5E 50%, #0F3D7E 100%)" }}
+    >
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-ocean-500/20 blur-[130px]" />
+      <div className="pointer-events-none absolute right-0 bottom-0 h-64 w-64 rounded-full bg-royal-400/15 blur-[100px]" />
+
+      {/* Grid */}
+      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.3]" aria-hidden="true">
         <defs>
           <pattern id="automationGrid" width="36" height="36" patternUnits="userSpaceOnUse">
-            <path d="M36 0H0V36" fill="none" stroke="#FFFFFF" strokeOpacity="0.06" />
+            <path d="M36 0H0V36" fill="none" stroke="#FFFFFF" strokeOpacity="0.05" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#automationGrid)" />
@@ -139,17 +144,16 @@ export default function AutomationSection() {
 
       <div
         ref={ref}
-        className={`relative mx-auto max-w-4xl px-5 text-center transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-4xl px-5 text-center transition-all duration-700 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
       >
-        <p className="text-xs font-semibold uppercase tracking-wide text-gold-400">
-          AI Automation &amp; n8n
+        <p className="text-xs font-semibold uppercase tracking-wide text-ocean-300">
+          AI Automation & n8n
         </p>
-        <h2 className="mt-3 text-3xl font-medium leading-tight text-white sm:text-4xl lg:text-5xl">
+        <h2 className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
           Automation that runs while you don't.
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base text-white/55 sm:text-lg">
+        <p className="mx-auto mt-5 max-w-xl text-base text-white/50 sm:text-lg">
           Powered by n8n and custom AI workflows, we connect the tools you
           already use so leads, orders and support tickets move themselves —
           less busywork for your team, fewer things dropped.
@@ -162,23 +166,23 @@ export default function AutomationSection() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm">
+        <div className="overflow-hidden rounded-3xl border border-ocean-400/20 bg-white/[0.04] backdrop-blur-sm shadow-2xl shadow-navy-900/40">
           <div
             className="flex transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${active * 100}%)` }}
           >
             {slides.map((slide) => (
               <div key={slide.title} className="w-full shrink-0 px-6 py-12 sm:px-14 sm:py-16">
-                <span className="mx-auto block w-fit rounded-full border border-gold-500/30 bg-gold-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-gold-300">
+                <span className="mx-auto block w-fit rounded-full border border-ocean-400/35 bg-ocean-500/15 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-ocean-200">
                   {slide.tag}
                 </span>
 
                 <NodeFlow nodes={slide.nodes} />
 
-                <h3 className="mt-2 text-center text-xl font-medium text-white sm:text-2xl">
+                <h3 className="mt-2 text-center text-xl font-semibold text-white sm:text-2xl">
                   {slide.title}
                 </h3>
-                <p className="mx-auto mt-3 max-w-md text-center text-sm text-white/55 sm:text-base">
+                <p className="mx-auto mt-3 max-w-md text-center text-sm text-white/50 sm:text-base">
                   {slide.description}
                 </p>
               </div>
@@ -191,7 +195,7 @@ export default function AutomationSection() {
           type="button"
           aria-label="Previous"
           onClick={() => goTo(active - 1)}
-          className="absolute left-0 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink p-2.5 text-white/60 transition-colors hover:border-gold-500/40 hover:text-gold-400 sm:flex"
+          className="absolute left-0 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ocean-400/25 bg-navy-800 p-2.5 text-ocean-300 transition-colors hover:border-ocean-400/50 hover:text-ocean-200 sm:flex"
         >
           <ChevronLeft size={18} />
         </button>
@@ -199,7 +203,7 @@ export default function AutomationSection() {
           type="button"
           aria-label="Next"
           onClick={() => goTo(active + 1)}
-          className="absolute right-0 top-1/2 hidden translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink p-2.5 text-white/60 transition-colors hover:border-gold-500/40 hover:text-gold-400 sm:flex"
+          className="absolute right-0 top-1/2 hidden translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ocean-400/25 bg-navy-800 p-2.5 text-ocean-300 transition-colors hover:border-ocean-400/50 hover:text-ocean-200 sm:flex"
         >
           <ChevronRight size={18} />
         </button>
@@ -214,14 +218,13 @@ export default function AutomationSection() {
                 type="button"
                 aria-label={`Go to slide ${i + 1}`}
                 onClick={() => goTo(i)}
-                className={`relative h-1.5 overflow-hidden rounded-full transition-all duration-300 ${
-                  isActive ? "w-8 bg-white/15" : "w-1.5 bg-white/15 hover:bg-white/30"
-                }`}
+                className={`relative h-1.5 overflow-hidden rounded-full transition-all duration-300 ${isActive ? "w-8 bg-white/15" : "w-1.5 bg-white/15 hover:bg-white/30"
+                  }`}
               >
                 {isActive && (
                   <span
                     key={`${active}-${paused}`}
-                    className="absolute inset-y-0 left-0 block w-full origin-left bg-gold-400 [animation:progress_4.5s_linear_forwards]"
+                    className="absolute inset-y-0 left-0 block w-full origin-left bg-ocean-400 [animation:progress_4.5s_linear_forwards]"
                     style={{ animationPlayState: paused ? "paused" : "running" }}
                   />
                 )}

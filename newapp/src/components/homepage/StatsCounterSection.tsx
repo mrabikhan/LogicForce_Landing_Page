@@ -47,12 +47,12 @@ function StatBlock({ stat, start }: { stat: Stat; start: boolean }) {
 
   return (
     <div className="flex flex-col items-center px-6 py-10 text-center sm:py-0">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-gold-500/25 bg-gold-500/10 text-gold-400">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-ocean-400/30 bg-ocean-500/15 text-ocean-300">
         <Icon size={24} />
       </div>
-      <p className="mt-6 text-6xl font-semibold leading-none text-white sm:text-7xl lg:text-8xl">
+      <p className="mt-6 text-6xl font-bold leading-none text-white sm:text-7xl lg:text-8xl">
         {value}
-        <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-ocean-300 to-royal-300 bg-clip-text text-transparent">
           {stat.suffix}
         </span>
       </p>
@@ -67,16 +67,19 @@ export default function StatsCounterSection() {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.3 });
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24">
+    <section
+      className="relative overflow-hidden py-24"
+      style={{ background: "linear-gradient(160deg, #0A2D5E 0%, #0F3D7E 50%, #1B2A4A 100%)" }}
+    >
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute left-1/4 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-gold-500/20 blur-[130px]" />
-      <div className="pointer-events-none absolute right-1/4 bottom-0 h-96 w-96 translate-x-1/2 rounded-full bg-gold-400/15 blur-[130px]" />
+      <div className="pointer-events-none absolute left-1/4 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-ocean-400/25 blur-[130px]" />
+      <div className="pointer-events-none absolute right-1/4 bottom-0 h-96 w-96 translate-x-1/2 rounded-full bg-royal-400/20 blur-[130px]" />
 
       {/* Faint grid */}
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.25]" aria-hidden="true">
+      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.2]" aria-hidden="true">
         <defs>
           <pattern id="statsGrid" width="44" height="44" patternUnits="userSpaceOnUse">
-            <path d="M44 0H0V44" fill="none" stroke="#FFFFFF" strokeOpacity="0.07" />
+            <path d="M44 0H0V44" fill="none" stroke="#FFFFFF" strokeOpacity="0.06" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#statsGrid)" />
@@ -84,19 +87,18 @@ export default function StatsCounterSection() {
 
       <div
         ref={ref}
-        className={`relative mx-auto max-w-3xl px-5 text-center transition-all duration-700 sm:px-8 ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+        className={`relative mx-auto max-w-3xl px-5 text-center transition-all duration-700 sm:px-8 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
       >
-        <p className="text-xs font-semibold uppercase tracking-wide text-gold-400">
+        <p className="text-xs font-semibold uppercase tracking-wide text-ocean-300">
           By the Numbers
         </p>
-        <h2 className="mt-3 text-3xl font-medium leading-tight text-white sm:text-4xl">
-          Results, not just promises.
+        <h2 className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl">
+          Force-backed results, not just promises.
         </h2>
       </div>
 
-      <div className="relative mx-auto mt-14 grid max-w-6xl grid-cols-1 divide-y divide-white/10 px-5 sm:grid-cols-2 sm:divide-y-0 sm:px-8 lg:grid-cols-4 lg:divide-x">
+      <div className="relative mx-auto mt-14 grid max-w-6xl grid-cols-1 divide-y divide-white/10 px-5 sm:grid-cols-2 sm:divide-y-0 sm:px-8 lg:grid-cols-4 lg:divide-x lg:divide-white/10">
         {stats.map((stat) => (
           <StatBlock key={stat.label} stat={stat} start={inView} />
         ))}

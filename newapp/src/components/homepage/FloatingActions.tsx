@@ -29,11 +29,10 @@ export default function FloatingActions() {
         type="button"
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className={`flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_-8px_rgba(10,10,11,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-8px_rgba(10,10,11,0.45)] ${
-          showScrollTop
+        className={`flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_-8px_rgba(10,10,11,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-8px_rgba(10,10,11,0.45)] ${showScrollTop
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-3 opacity-0"
-        }`}
+          }`}
       >
         <ArrowUp size={18} />
       </button>
